@@ -1,6 +1,6 @@
 modLoader = "javafml"
 loaderVersion = "[40,)"
-license = "AGPL v3"
+license = "CC0"
 [[mods]]
 modId = "firesafer"
 version = "1.0.0"
