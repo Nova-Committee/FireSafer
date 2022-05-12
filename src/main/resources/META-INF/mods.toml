@@ -1,0 +1,16 @@
+modLoader = "javafml"
+loaderVersion = "[40,)"
+license = "AGPL v3"
+[[mods]]
+modId = "firesafer"
+version = "1.0.0"
+displayName = "FireSafer"
+credits = ""
+authors = "Nova Committee"
+description = "Official example addon of firesafety."
+[[dependencies.firesafer]]
+modId = "firesafety"
+mandatory = true
+versionRange = "*"
+ordering = "NONE"
+side = "BOTH"
