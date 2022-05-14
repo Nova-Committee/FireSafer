@@ -10,6 +10,7 @@ import net.minecraft.world.entity.animal.Salmon;
 import net.minecraft.world.entity.animal.TropicalFish;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -22,6 +23,8 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.HashMap;
 import java.util.function.BiConsumer;
+
+import static net.minecraft.world.entity.monster.Creeper.DATA_IS_IGNITED;
 
 @Mod(FireSafer.MODID)
 public class FireSafer {
@@ -46,6 +49,15 @@ public class FireSafer {
                 (w, e) -> {
                     w.addFreshEntity(new ItemEntity(w, e.getX(), e.getY() + 0.2D, e.getZ(), new ItemStack(Items.TNT)));
                     e.kill();
+                }
+        ));
+        event.addExtinguishable((short) 13467, new FireSafetyApi.ExtinguishableEntity(
+                (w, e) -> e instanceof Creeper && e.getEntityData().get(DATA_IS_IGNITED),
+                (w, e) -> {
+                    e.getEntityData().set(DATA_IS_IGNITED, false);
+                    final var c = (Creeper) e;
+                    c.setSwellDir(0);
+                    c.maxSwell = 5000;
                 }
         ));
         event.addFireFightingWaterItem((short) 13468, new FireSafetyApi.FireFightingWaterContainerItem(
