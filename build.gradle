@@ -76,7 +76,7 @@ repositories {
 dependencies {
 
     minecraft 'net.minecraftforge:forge:1.18.2-40.1.0'
-    implementation fg.deobf("com.github.Nova-Committee:FireSafety:Forge~1.18.2-build2205121609")
+    implementation fg.deobf("com.github.Nova-Committee:FireSafety:Forge~1.18.2-build2205212257")
 
 }
 
