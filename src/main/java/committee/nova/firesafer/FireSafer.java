@@ -29,6 +29,7 @@ import static net.minecraft.world.entity.monster.Creeper.DATA_IS_IGNITED;
 @Mod(FireSafer.MODID)
 public class FireSafer {
     public static final String MODID = "firesafer";
+    public static final String MODNAME = "FireSafer";
     private final HashMap<Item, BiConsumer<Level, Vec3>> entityBucket = new HashMap<>();
 
     public FireSafer() {
@@ -38,20 +39,20 @@ public class FireSafer {
 
     @SubscribeEvent
     public void onExtension(FireSafetyExtensionEvent event) {
-        event.addExtinguishable((short) 13468, new FireSafetyApi.ExtinguishableBlock(
+        event.addExtinguishable(MODNAME, (short) 13468, new FireSafetyApi.ExtinguishableBlock(
                 (w, p) -> w.getBlockState(p).is(Blocks.LAVA),
                 (w, p) -> Blocks.MAGMA_BLOCK.defaultBlockState(),
                 (w, p) -> {
                 }
         ));
-        event.addExtinguishable((short) 13468, new FireSafetyApi.ExtinguishableEntity(
+        event.addExtinguishable(MODNAME, (short) 13468, new FireSafetyApi.ExtinguishableEntity(
                 (w, e) -> e.getType().equals(EntityType.TNT),
                 (w, e) -> {
                     w.addFreshEntity(new ItemEntity(w, e.getX(), e.getY() + 0.2D, e.getZ(), new ItemStack(Items.TNT)));
                     e.kill();
                 }
         ));
-        event.addExtinguishable((short) 13467, new FireSafetyApi.ExtinguishableEntity(
+        event.addExtinguishable(MODNAME, (short) 13467, new FireSafetyApi.ExtinguishableEntity(
                 (w, e) -> e instanceof Creeper && e.getEntityData().get(DATA_IS_IGNITED),
                 (w, e) -> {
                     e.getEntityData().set(DATA_IS_IGNITED, false);
@@ -60,7 +61,7 @@ public class FireSafer {
                     c.maxSwell = 5000;
                 }
         ));
-        event.addFireFightingWaterItem((short) 13468, new FireSafetyApi.FireFightingWaterContainerItem(
+        event.addFireFightingWaterItem(MODNAME, (short) 13468, new FireSafetyApi.FireFightingWaterContainerItem(
                 (p, s) -> entityBucket.containsKey(s.getItem()),
                 (p, s) -> 800,
                 (p, a, s) -> new ItemStack(Items.BUCKET),
